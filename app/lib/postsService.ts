@@ -25,12 +25,12 @@ export interface PostsResponse {
 export const getAllPosts = async (
   limit: number = 10,
   skip: number = 0
-): Promise<PostsResponse> => {
+): Promise<Post[]> => {
   const response = await api.get<PostsResponse>(
     `/posts?limit=${limit}&skip=${skip}`
   );
 
-  return response.data;
+  return response.data.posts;
 };
 
 // ✅ Get Single Post

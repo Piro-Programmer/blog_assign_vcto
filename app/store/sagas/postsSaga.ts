@@ -9,10 +9,11 @@ import { getAllPosts } from '../../lib/postsService';
 import { PostsResponse } from '../../lib/postsService';
 
 function* fetchPostsSaga(): Generator {
+  console.log('Saga Called');
   try {
-    const response = (yield call(getAllPosts, 10, 0)) as PostsResponse;
-
-    yield put(fetchPostsSuccess(response.posts));
+    const posts = (yield call(getAllPosts, 10, 0)) as any;
+    console.log('Posts', posts);
+    yield put(fetchPostsSuccess(posts));
   } catch (error: unknown) {
     const err = error as Error;
 
@@ -23,3 +24,4 @@ function* fetchPostsSaga(): Generator {
 export default function* postsSaga(): Generator {
   yield takeLatest(fetchPostsRequest.type, fetchPostsSaga);
 }
+

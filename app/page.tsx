@@ -13,9 +13,11 @@ import PostCard from './components/blog/PostCard/page';
 export default function HomePage() {
   const dispatch = useDispatch();
 
-  const { posts, loading, error } = useSelector(
-    (state: RootState) => state.posts
-  );
+  const {
+    posts = [],
+    loading,
+    error
+  } = useSelector((state: RootState) => state.posts);
 
   useEffect(() => {
     dispatch(fetchPostsRequest());
@@ -93,7 +95,7 @@ export default function HomePage() {
         {error && <p className="text-red-500">{error}</p>}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post) => (
+          {posts?.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}
         </div>

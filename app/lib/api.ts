@@ -1,8 +1,10 @@
-import axios, {
+import axios from 'axios';
+
+import {
   AxiosInstance,
-  AxiosRequestConfig,
   AxiosResponse,
-  AxiosError
+  AxiosError,
+  InternalAxiosRequestConfig
 } from 'axios';
 
 // ✅ Create Axios Instance
@@ -15,7 +17,7 @@ const api: AxiosInstance = axios.create({
 
 // ✅ Request Interceptor (Typed)
 api.interceptors.request.use(
-  (config: AxiosRequestConfig): AxiosRequestConfig => {
+  (config: InternalAxiosRequestConfig) => {
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('token');
 
